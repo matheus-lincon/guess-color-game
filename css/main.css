@@ -1,0 +1,143 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--white);
+  font-family: var(--font);
+}
+
+body a {
+  text-decoration: none;
+}
+
+.button {
+  background-color: var(--white);
+  padding: 0.625rem;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--black);
+  cursor: pointer;
+
+  font-weight: 900;
+}
+
+/* MENU */
+
+#menu {
+  display: block;
+
+  background-color: var(--background-menu);
+  min-width: calc(100vw / 2);
+
+  height: 0;
+  overflow: hidden;
+
+  top: 3.4375rem;
+  right: 0;
+
+  position: fixed;
+
+  border-radius: 0 0 1rem 1rem;
+  transition: 0.3s;
+}
+
+#menu.toggle {
+  height: calc(100vh / 2);
+}
+
+/* close menu */
+#menu #close-menu #close-button {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+
+  width: 1.875rem;
+  height: 1.875rem;
+
+  text-align: center;
+  font-weight: bolder;
+
+  border-radius: 50%;
+  border: none;
+  box-shadow: 1px 1px 1px #080808;
+
+  cursor: pointer;
+}
+
+/* --- */
+
+#menu ul {
+  padding: 1rem;
+  display: grid;
+  min-height: 129px;
+  margin-top: 50px;
+
+  place-items: center;
+  gap: 50px;
+}
+
+#menu ul li {
+  list-style: none;
+}
+
+#menu ul li a {
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0 0.3125rem 0 0.3125rem;
+}
+
+#menu ul li a:hover {
+  color: var(--yellow);
+}
+
+#menu ul li a::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  position: absolute;
+  background-color: var(--yellow);
+  left: 0;
+  bottom: -6px;
+  transition: 0.2s;
+}
+
+#menu ul li a:hover::after {
+  color: var(--yellow);
+  width: 100%;
+}
+
+/* game title */
+#game-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+#game-title a {
+  color: var(--white);
+  margin-left: 0.625rem;
+}
+
+/* header */
+header {
+  background-color: var(--header-background);
+  height: 3.4375rem;
+}
+
+/* header > nav */
+header nav {
+  height: 3.4375rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header nav #select-button {
+  margin-right: 1rem;
+}
