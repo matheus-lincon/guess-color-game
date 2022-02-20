@@ -1,7 +1,7 @@
 :root {
   --background-color: #080808;
-  --header-background: #3684cd;
-  --background-menu: #003d75;
+  --header-background: #8844dd;
+  --background-menu: #47126b;
 
   --white: #ffffff;
   --black: #000000;
@@ -10,5 +10,5 @@
   --border-radius: 1rem;
   --font: 'Roboto', sans-serif;
 
-  --mobile-game-title: 14px;
+  --mobile-game-title: 1rem;
 }

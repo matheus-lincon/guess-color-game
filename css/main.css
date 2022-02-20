@@ -114,8 +114,7 @@ body a {
 
 /* game title */
 #game-title {
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: var(--mobile-game-title);
 }
 
 #game-title a {
@@ -140,4 +139,84 @@ header nav {
 
 header nav #select-button {
   margin-right: 1rem;
+}
+
+/*  GAME */
+
+/*container*/
+#container {
+  display: grid;
+  place-content: center;
+}
+
+/*game*/
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 1.875rem;
+  padding: 1rem;
+}
+
+/* game display */
+#game #game-display {
+  background-color: var(--white);
+  color: var(--black);
+  padding: 0 3rem 0 3rem;
+  width: auto;
+  height: 2.875rem;
+  border-radius: var(--border-radius);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game #game-display p {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+/* game points */
+#game #game-points {
+  margin: 1.5625rem 0 1.5625rem 0;
+}
+
+#game #game-points p {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+#game #game-points p span {
+  color: var(--yellow);
+}
+
+/* game game-colors */
+#game #game-colors {
+  display: grid;
+  gap: 1.25rem;
+}
+
+#game #game-colors .color-container {
+  width: 9.375rem;
+  height: 3.125rem;
+
+  border-radius: var(--border-radius);
+  border: 5px solid #f8f8f880;
+}
+
+/* Footer */
+footer {
+  padding: 2rem 1rem;
+  opacity: 0.8;
+  font-weight: 900;
+  text-align: center;
+}
+
+footer a {
+  color: #8844dd;
+  text-decoration: underline;
 }
