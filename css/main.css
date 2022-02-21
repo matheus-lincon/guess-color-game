@@ -92,10 +92,6 @@ body a {
   padding: 0 0.3125rem 0 0.3125rem;
 }
 
-#menu ul li a:hover {
-  color: var(--yellow);
-}
-
 #menu ul li a::after {
   content: '';
   width: 0%;
@@ -107,7 +103,11 @@ body a {
   transition: 0.2s;
 }
 
-#menu ul li a:hover::after {
+body.hasHover #menu ul li a:hover {
+  color: var(--yellow);
+}
+
+body.hasHover #menu ul li a:hover::after {
   color: var(--yellow);
   width: 100%;
 }

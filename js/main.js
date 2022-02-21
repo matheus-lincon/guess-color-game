@@ -16,7 +16,49 @@ let currentPoints = 1
  * Events
  */
 
-//
+/** loaded when page loads */
+//generate random color when page loads
+
+window.onload = () => {
+  checkHover()
+  difficultySelections.forEach((selection) => {
+    if (selection.classList.contains('active')) {
+      generateColor(selection.id)
+    }
+  })
+}
+
+/**Enable or Ignore hover on touch devices */
+function checkHover() {
+  let touchTime = 0
+
+  function enableHover() {
+    if (new Date() - touchTime < 500) return
+    document.body.classList.add('hasHover')
+  }
+
+  function disableHover() {
+    document.body.classList.remove('hasHover')
+  }
+
+  function updateTouchTime() {
+    touchTime = new Date()
+  }
+
+  document.addEventListener('touchstart', updateTouchTime, true)
+  document.addEventListener('touchstart', disableHover, true)
+  document.addEventListener('mousemove', enableHover, true)
+
+  enableHover()
+}
+
+/**Click events */
+
+colorsContainer.forEach((colorContainer) => {
+  colorContainer.addEventListener('click', (e) => {
+    checkContainer(e.target.style.backgroundColor)
+  })
+})
 
 difficultySelections.forEach((selection) => {
   selection.addEventListener('click', () => {
@@ -31,28 +73,13 @@ difficultySelections.forEach((selection) => {
   })
 })
 
-colorsContainer.forEach((colorContainer) => {
-  colorContainer.addEventListener('click', (e) => {
-    checkContainer(e.target.style.backgroundColor)
-  })
-})
-
-//generate random color when page loads
-window.onload = () => {
-  difficultySelections.forEach((selection) => {
-    if (selection.classList.contains('active')) {
-      generateColor(selection.id)
-    }
-  })
-}
-
 //open/close menu
 selectButton.addEventListener('click', () => {
-  menu.classList.toggle('toggle')
+  menu.classList.add('toggle')
 })
 
 closeButton.addEventListener('click', () => {
-  menu.classList.toggle('toggle')
+  menu.classList.remove('toggle')
 })
 
 /** FUNCTIONS */
@@ -156,10 +183,3 @@ const checkPoints = (points) => {
     window.location.reload()
   }
 }
-/**
- * 1. Generate a random color based on difficulty
- *  - 0: easy (color name)
- *  - 1: medium (rgb color)
- *  - 2: hard (hex color)
- * 2. Difficulty starts with medium
- */
