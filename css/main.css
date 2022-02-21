@@ -39,7 +39,7 @@ body a {
   top: 3.4375rem;
   right: 0;
 
-  position: fixed;
+  position: absolute;
 
   border-radius: 0 0 1rem 1rem;
   transition: 0.3s;
@@ -112,6 +112,10 @@ body a {
   width: 100%;
 }
 
+#menu ul li a.active {
+  color: var(--yellow);
+}
+
 /* game title */
 #game-title {
   font-size: var(--mobile-game-title);
@@ -177,7 +181,8 @@ header nav #select-button {
 #game #game-display p {
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  width: 100%;
 }
 
 /* game points */
@@ -206,6 +211,8 @@ header nav #select-button {
 
   border-radius: var(--border-radius);
   border: 5px solid #f8f8f880;
+
+  cursor: pointer;
 }
 
 /* Footer */
