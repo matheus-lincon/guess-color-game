@@ -10,7 +10,7 @@ const difficultySelections = document.querySelectorAll('.difficulty-selection')
 
 /* --- */
 
-let currentPoints = 1
+let currentPoints = 0
 
 /**
  * Events
@@ -135,18 +135,11 @@ const generateRGBColors = () => {
 }
 
 const addPoints = () => {
-  //check if reached max points
-  currentPoints++
-  document.querySelector('#points').innerText = currentPoints
-
-  return currentPoints
+  return ++currentPoints
 }
 
 const removePoints = () => {
-  currentPoints--
-  document.querySelector('#points').innerText = currentPoints
-
-  return currentPoints
+  return --currentPoints
 }
 //---
 const checkContainer = (containerColor) => {
@@ -162,12 +155,6 @@ const checkContainer = (containerColor) => {
   } else {
     let points = removePoints()
     checkPoints(points)
-    //generate new color
-    difficultySelections.forEach((selection) => {
-      if (selection.classList.contains('active')) {
-        generateColor(selection.id)
-      }
-    })
   }
 }
 
@@ -175,11 +162,14 @@ const checkPoints = (points) => {
   let maxPoints = 10
 
   if (points >= maxPoints) {
+    document.querySelector('#points').innerText = points
     alert('Congratulations!')
     window.location.reload()
-  }
-  if (points <= 0) {
+  } else if (points <= 0) {
+    document.querySelector('#points').innerText = 0
     alert('You lose!')
     window.location.reload()
+  } else {
+    document.querySelector('#points').innerText = points
   }
 }
