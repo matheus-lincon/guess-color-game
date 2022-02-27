@@ -11,6 +11,7 @@ const difficultySelections = document.querySelectorAll('.difficulty-selection')
 /* --- */
 
 let currentPoints = 0
+let currentSelection = null
 
 /**
  * Events
@@ -62,14 +63,15 @@ colorsContainer.forEach((colorContainer) => {
 
 difficultySelections.forEach((selection) => {
   selection.addEventListener('click', () => {
-    if (selection.id != 1) return alert('Working on it...')
+    if (selection.id != 1 && selection.id != 2) return alert('Working on it...')
     if (selection.classList.contains('active')) return
     for (let i = 0; i < difficultySelections.length; i++) {
       difficultySelections[i].classList.remove('active')
     }
 
+    currentSelection = selection.id
     selection.classList.add('active')
-    generateColor(selection.id)
+    generateColor(currentSelection)
   })
 })
 
@@ -112,6 +114,12 @@ const generateColor = (difficulty) => {
       updateColorsContainer(listRGB)
       break
     case '2':
+      console.log('hard difficulty selected')
+      let listHexColors = generateHexColors()
+      let randomHex =
+        listHexColors[Math.floor(Math.random() * listHexColors.length)]
+      updateDisplay(randomHex)
+      updateColorsContainer(listHexColors)
       break
     default:
       alert('Invalid difficulty...')
@@ -133,6 +141,42 @@ const generateRGBColors = () => {
 
   return rgbColors
 }
+
+const generateHexColors = () => {
+  let hexColors = []
+  let hexChars = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+  ]
+
+  let hex = '#'
+
+  for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 6; i++) {
+      hex += hexChars[Math.floor(Math.random() * hexChars.length)]
+    }
+    hexColors.push(hex)
+    hex = '#'
+  }
+
+  return hexColors
+}
+
+//-----
 
 const addPoints = () => {
   return ++currentPoints
@@ -168,8 +212,14 @@ const checkPoints = (points) => {
   } else if (points <= 0) {
     document.querySelector('#points').innerText = 0
     alert('You lose!')
-    window.location.reload()
+    resetScreen()
   } else {
     document.querySelector('#points').innerText = points
   }
+}
+
+const resetScreen = () => {
+  document.querySelector('#points').innerText = 0
+  currentPoints = 0
+  generateColor(currentSelection)
 }
