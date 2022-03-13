@@ -11,7 +11,7 @@ const difficultySelections = document.querySelectorAll('.difficulty-selection')
 /* --- */
 
 let currentPoints = 0
-let currentSelection = null
+let currentSelection = 1
 
 /**
  * Events
@@ -24,7 +24,8 @@ window.onload = () => {
   checkHover()
   difficultySelections.forEach((selection) => {
     if (selection.classList.contains('active')) {
-      generateColor(selection.id)
+      currentSelection = selection.id
+      generateColor(currentSelection)
     }
   })
 }
@@ -63,7 +64,6 @@ colorsContainer.forEach((colorContainer) => {
 
 difficultySelections.forEach((selection) => {
   selection.addEventListener('click', () => {
-    if (selection.id != 1 && selection.id != 2) return alert('Working on it...')
     if (selection.classList.contains('active')) return
     for (let i = 0; i < difficultySelections.length; i++) {
       difficultySelections[i].classList.remove('active')
@@ -72,6 +72,7 @@ difficultySelections.forEach((selection) => {
     currentSelection = selection.id
     selection.classList.add('active')
     generateColor(currentSelection)
+    resetScreen()
   })
 })
 
@@ -105,6 +106,11 @@ const generateColor = (difficulty) => {
   switch (difficulty) {
     case '0':
       //easy - color name
+      let listColorName = generateNameColors()
+      let randomColorName =
+        listColorName[Math.floor(Math.random() * listColorName.length)]
+      updateDisplay(randomColorName)
+      updateColorsContainer(listColorName)
       break
     case '1':
       // medium - rgb color
@@ -114,7 +120,6 @@ const generateColor = (difficulty) => {
       updateColorsContainer(listRGB)
       break
     case '2':
-      console.log('hard difficulty selected')
       let listHexColors = generateHexColors()
       let randomHex =
         listHexColors[Math.floor(Math.random() * listHexColors.length)]
@@ -127,6 +132,165 @@ const generateColor = (difficulty) => {
 }
 
 //name, rgb and hex
+
+const generateNameColors = () => {
+  let nameColors = [
+    'black',
+    'silver',
+    'gray',
+    'white',
+    'maroon',
+    'red',
+    'purple',
+    'fuchsia',
+    'green',
+    'lime',
+    'olive',
+    'yellow',
+    'navy',
+    'blue',
+    'teal',
+    'aqua',
+    'orange',
+    'aliceblue',
+    'antiquewhite',
+    'aquamarine',
+    'azure',
+    'beige',
+    'bisque',
+    'blanchedalmond',
+    'blueviolet',
+    'brown',
+    'burlywood',
+    'cadetblue',
+    'chartreuse',
+    'chocolate',
+    'coral',
+    'cornflowerblue',
+    'cornsilk',
+    'crimson',
+    'cyan',
+    'darkblue',
+    'darkcyan',
+    'darkgoldenrod',
+    'darkgray',
+    'darkgreen',
+    'darkgrey',
+    'darkkhaki',
+    'darkmagenta',
+    'darkolivegreen',
+    'darkorange',
+    'darkorchid',
+    'darkred',
+    'darksalmon',
+    'darkseagreen',
+    'darkslateblue',
+    'darkslategray',
+    'darkslategrey',
+    'darkturquoise',
+    'darkviolet',
+    'deeppink',
+    'deepskyblue',
+    'dimgray',
+    'dimgrey',
+    'dodgerblue',
+    'firebrick',
+    'floralwhite',
+    'forestgreen',
+    'gainsboro',
+    'ghostwhite',
+    'gold',
+    'goldenrod',
+    'greenyellow',
+    'grey',
+    'honeydew',
+    'hotpink',
+    'indianred',
+    'indigo',
+    'ivory',
+    'khaki',
+    'lavender',
+    'lavenderblush',
+    'lawngreen',
+    'lemonchiffon',
+    'lightblue',
+    'lightcoral',
+    'lightcyan',
+    'lightgoldenrodyellow',
+    'lightgray',
+    'lightgreen',
+    'lightgrey',
+    'lightpink',
+    'lightsalmon',
+    'lightseagreen',
+    'lightskyblue',
+    'lightslategray',
+    'lightslategrey',
+    'lightsteelblue',
+    'lightyellow',
+    'limegreen',
+    'linen',
+    'mediumaquamarine',
+    'mediumblue',
+    'mediumorchid',
+    'mediumpurple',
+    'mediumseagreen',
+    'mediumslateblue',
+    'mediumspringgreen',
+    'mediumturquoise',
+    'mediumvioletred',
+    'midnightblue',
+    'mintcream',
+    'mistyrose',
+    'moccasin',
+    'navajowhite',
+    'oldlace',
+    'olivedrab',
+    'orangered',
+    'orchid',
+    'palegoldenrod',
+    'palegreen',
+    'paleturquoise',
+    'palevioletred',
+    'papayawhip',
+    'peachpuff',
+    'peru',
+    'pink',
+    'plum',
+    'powderblue',
+    'rosybrown',
+    'royalblue',
+    'saddlebrown',
+    'salmon',
+    'sandybrown',
+    'seagreen',
+    'seashell',
+    'sienna',
+    'skyblue',
+    'slateblue',
+    'slategray',
+    'slategrey',
+    'snow',
+    'springgreen',
+    'steelblue',
+    'tan',
+    'thistle',
+    'tomato',
+    'turquoise',
+    'violet',
+    'wheat',
+    'whitesmoke',
+    'yellowgreen',
+    'rebeccapurple',
+  ]
+  let nameColor = []
+
+  for (let i = 0; i < 4; i++) {
+    nameColor.push(nameColors[Math.floor(Math.random() * nameColors.length)])
+  }
+
+  return nameColor
+}
 
 const generateRGBColors = () => {
   let rgbColors = []
@@ -177,6 +341,15 @@ const generateHexColors = () => {
 }
 
 //-----
+const charToHex = (char) => {
+  char = Number(char)
+  let hexChar = char.toString(16)
+  return hexChar.length == 1 ? `0${hexChar}` : hexChar
+}
+
+const convertRGBToHex = (r, g, b) => {
+  return `#${charToHex(r)}${charToHex(g)}${charToHex(b)}`
+}
 
 const addPoints = () => {
   return ++currentPoints
@@ -187,18 +360,19 @@ const removePoints = () => {
 }
 //---
 const checkContainer = (containerColor) => {
+  if (currentSelection === '2') {
+    let rgbValues = containerColor.replace(/[^\d,]/g, '').split(',')
+    containerColor = convertRGBToHex(rgbValues[0], rgbValues[1], rgbValues[2])
+  }
+
   if (containerColor === gameDisplay.innerText.toLowerCase()) {
     let points = addPoints()
     checkPoints(points)
-    //generate new color
-    difficultySelections.forEach((selection) => {
-      if (selection.classList.contains('active')) {
-        generateColor(selection.id)
-      }
-    })
+    generateColor(currentSelection)
   } else {
     let points = removePoints()
     checkPoints(points)
+    generateColor(currentSelection)
   }
 }
 
