@@ -360,11 +360,7 @@ const removePoints = () => {
 }
 //---
 const checkContainer = (containerColor) => {
-<<<<<<< HEAD
   if (currentSelection === '2') {
-=======
-  if(currentSelection === '2') {
->>>>>>> 4c36f8787a7da52560a443b6bb034add71a0b248
     let rgbValues = containerColor.replace(/[^\d,]/g, '').split(',')
     containerColor = convertRGBToHex(rgbValues[0], rgbValues[1], rgbValues[2])
   }
@@ -372,10 +368,6 @@ const checkContainer = (containerColor) => {
   if (containerColor === gameDisplay.innerText.toLowerCase()) {
     let points = addPoints()
     checkPoints(points)
-<<<<<<< HEAD
-=======
-    //generate new color
->>>>>>> 4c36f8787a7da52560a443b6bb034add71a0b248
     generateColor(currentSelection)
   } else {
     let points = removePoints()
