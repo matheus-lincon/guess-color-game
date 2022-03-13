@@ -11,7 +11,7 @@ const difficultySelections = document.querySelectorAll('.difficulty-selection')
 /* --- */
 
 let currentPoints = 0
-let currentSelection = 1
+let currentSelection = null
 
 /**
  * Events
